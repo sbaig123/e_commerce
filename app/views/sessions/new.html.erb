@@ -1,0 +1,10 @@
+<h1> Sign In </h1>
+<table align='center'>
+	<%= form_tag(controller: "sessions", action: "create", method: "post") do %>
+		<tr><td><%= label_tag "User Id" %></td>
+		<td><%= text_field_tag :id %></td></tr>
+		<tr><td><%= label_tag "Password" %></td>
+		<td><%= password_field_tag :password %></td></tr>
+		<tr><td></td><td><%= submit_tag "Submit" %>
+	<% end %>
+</table>

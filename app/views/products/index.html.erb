@@ -1,0 +1,66 @@
+<h3 class="text-center">Products for Sale</h3>
+
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+		<% @products.each do |product| %>
+			<%= render "product_row", product: product %>
+		<% end %>
+<div ng-app="sortableApp" ng-controller="sortableController" class="container">
+  <h2>ui.sortable single minified cdn file</h2>
+
+  <div class="floatleft">
+    <ul ui-sortable="sortableOptions" ng-model="list" class="list">
+      <li ng-repeat="item in list" class="item">
+        {{item.text}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="floatleft" style="margin-left: 20px;">
+    <ul class="list logList">
+      <li ng-repeat="entry in sortingLog track by $index" class="logItem">
+        {{entry}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script>
+var myapp = angular.module('sortableApp', ['ui.sortable']);
+myapp.controller('sortableController', function ($scope) {
+  var tmpList = [];
+  
+  for (var i = 1; i <= 6; i++){
+    tmpList.push({
+      text: 'Item ' + i,
+      value: i
+    });
+  }
+  
+  $scope.list = tmpList;
+  
+  
+  $scope.sortingLog = [];
+  
+  $scope.sortableOptions = {
+    update: function(e, ui) {
+      var logEntry = tmpList.map(function(i){
+        return i.value;
+      }).join(', ');
+      $scope.sortingLog.push('Update: ' + logEntry);
+    },
+    stop: function(e, ui) {
+      // this callback has the changed model
+      var logEntry = tmpList.map(function(i){
+        return i.value;
+      }).join(', ');
+      $scope.sortingLog.push('Stop: ' + logEntry);
+    }
+  };
+});
+</script>
+
+
